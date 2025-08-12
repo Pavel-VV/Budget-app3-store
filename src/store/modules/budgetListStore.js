@@ -17,6 +17,7 @@ const budgetListStore = {
     },
   },
   getters: {
+    getBudgetList: ({ list }) => list,
     getTotalBalance: ({ list }) => {
       let balance = Object.values(list).reduce(function (sum, el) {
         return sum + el.value;

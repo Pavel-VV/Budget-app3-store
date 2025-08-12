@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import budgetList from "./modules/budgetList";
+import budgetListStore from "./modules/budgetListStore";
 
 Vue.use(Vuex);
 
@@ -10,6 +10,6 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    budgetList,
+    budgetListStore,
   },
 });

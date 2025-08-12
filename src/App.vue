@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <FormBudget @addNewItem="onNewItem" />
-    <TotalBalance :total="totalBalance" />
+    <TotalBalance />
     <BudgetSort @sortList="onSortList" />
     <BudgetList :list="sortListBudget" @deleteItem="onDelete" />
   </div>
@@ -12,6 +12,7 @@ import BudgetList from "@/components/BudgetList";
 import TotalBalance from "@/components/TotalBalance";
 import FormBudget from "@/components/FormBudget";
 import BudgetSort from "@/components/BudgetSort";
+import { mapGetters } from "vuex";
 export default {
   name: "App",
   components: {
@@ -39,20 +40,21 @@ export default {
     sortedList: null,
   }),
   computed: {
-    totalBalance() {
-      let balance = Object.values(this.list).reduce(function (sum, el) {
-        return sum + el.value;
-      }, 0);
-      return balance;
-    },
+    ...mapGetters("budgetListStore", ["getBudgetList"]),
+    // totalBalance() {
+    //   let balance = Object.values(this.list).reduce(function (sum, el) {
+    //     return sum + el.value;
+    //   }, 0);
+    //   return balance;
+    // },
     sortListBudget() {
-      let list = { ...this.list };
+      let list = { ...this.getBudgetList };
       if (this.sortedList !== null) list = this.sortedList;
       return list;
     },
   },
   watch: {
-    list: "sortList",
+    getBudgetList: "sortList",
   },
   methods: {
     onDelete(id) {
@@ -64,12 +66,15 @@ export default {
     },
     sortList() {
       let type = this.dataType;
-      let sortedList = Object.values(this.list).reduce((list, item) => {
-        if (item.type === type) {
-          list[item.id] = item;
-        } else if (type === "ALL") list[item.id] = item;
-        return list;
-      }, {});
+      let sortedList = Object.values(this.getBudgetList).reduce(
+        (list, item) => {
+          if (item.type === type) {
+            list[item.id] = item;
+          } else if (type === "ALL") list[item.id] = item;
+          return list;
+        },
+        {}
+      );
       this.sortedList = sortedList;
     },
     onSortList(type = "ALL") {
