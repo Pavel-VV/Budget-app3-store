@@ -2,7 +2,7 @@
   <div class="budget-list-wrap">
     <ElCard :header="header">
       <template v-if="!isEmpty">
-        <div v-for="(item, prop) in list" :key="prop">
+        <div v-for="(item, prop) in sortListBudget" :key="prop">
           <BudgetListItem :item="item" @deleteItemToList="deleteItemToApp" />
         </div>
       </template>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import BudgetListItem from "@/components/BudgetListItem";
 export default {
   name: "BudgetList",
@@ -21,7 +22,7 @@ export default {
   props: {
     list: {
       type: Object,
-      default: () => ({}),
+      default: () => ({ 1: 1 }),
     },
   },
   data: () => ({
@@ -29,6 +30,7 @@ export default {
     emptyTitle: "Empty list",
   }),
   computed: {
+    ...mapGetters("budgetListStore", ["sortListBudget"]),
     isEmpty() {
       return !Object.keys(this.list).length;
     },

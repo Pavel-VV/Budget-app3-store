@@ -26,17 +26,20 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "BudgetSort",
-  data: () => ({
-    sort: "ALL",
-  }),
+  // data: () => ({
+  //   sort: "ALL",
+  // }),
   methods: {
+    ...mapActions("budgetListStore", ["changeSort"]),
     budgetSort(e) {
       let button = e.target;
       if (button.tagName !== "BUTTON") button = button.parentElement;
-      this.sort = button.dataset.sort;
-      this.$emit("sortList", this.sort);
+      this.changeSort(button.dataset.sort);
+      // this.sort = button.dataset.sort;
+      // this.$emit("sortList", this.sort);
     },
   },
 };

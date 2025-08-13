@@ -2,8 +2,8 @@
   <div id="app">
     <FormBudget @addNewItem="onNewItem" />
     <TotalBalance />
-    <BudgetSort @sortList="onSortList" />
-    <BudgetList :list="sortListBudget" @deleteItem="onDelete" />
+    <BudgetSort />
+    <BudgetList @deleteItem="onDelete" />
   </div>
 </template>
 
@@ -47,11 +47,11 @@ export default {
     //   }, 0);
     //   return balance;
     // },
-    sortListBudget() {
-      let list = { ...this.getBudgetList };
-      if (this.sortedList !== null) list = this.sortedList;
-      return list;
-    },
+    // sortListBudget() {
+    //   let list = { ...this.getBudgetList };
+    //   if (this.sortedList !== null) list = this.sortedList;
+    //   return list;
+    // },
   },
   watch: {
     getBudgetList: "sortList",
@@ -64,23 +64,23 @@ export default {
       const newObj = { ...item, id: String(Math.random()) };
       this.$set(this.list, newObj.id, newObj);
     },
-    sortList() {
-      let type = this.dataType;
-      let sortedList = Object.values(this.getBudgetList).reduce(
-        (list, item) => {
-          if (item.type === type) {
-            list[item.id] = item;
-          } else if (type === "ALL") list[item.id] = item;
-          return list;
-        },
-        {}
-      );
-      this.sortedList = sortedList;
-    },
-    onSortList(type = "ALL") {
-      this.dataType = type;
-      this.sortList();
-    },
+    // sortList() {
+    //   let type = this.dataType;
+    //   let sortedList = Object.values(this.getBudgetList).reduce(
+    //     (list, item) => {
+    //       if (item.type === type) {
+    //         list[item.id] = item;
+    //       } else if (type === "ALL") list[item.id] = item;
+    //       return list;
+    //     },
+    //     {}
+    //   );
+    //   this.sortedList = sortedList;
+    // },
+    // onSortList(type = "ALL") {
+    //   this.dataType = type;
+    //   this.sortList();
+    // },
   },
 };
 </script>
