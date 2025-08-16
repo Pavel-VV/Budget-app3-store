@@ -44,11 +44,6 @@ const budgetListStore = {
     },
     CHANGE_SORTED_LIST(state, list) {
       state.sortedList = list;
-      // state.sortedList = {};
-      // console.log(Object.keys(state.sortedList).length);
-      // Object.values(list).forEach((elem) =>
-      //   Vue.set(state.sortedList, elem.id, elem)
-      // );
     },
     DELETE_ITEM(state, id) {
       Vue.delete(state.list, id);
@@ -56,7 +51,6 @@ const budgetListStore = {
   },
   actions: {
     changeSort({ commit, getters }, type) {
-      // console.log(type);
       if (type !== undefined) {
         commit("TOGGLE_SORT", type);
       }
@@ -70,7 +64,6 @@ const budgetListStore = {
         {}
       );
       commit("CHANGE_SORTED_LIST", sortedList);
-      // this.sortedList = sortedList;
     },
     setNewItemList({ commit }, item) {
       const newItem = { ...item, id: String(Math.random()) };
