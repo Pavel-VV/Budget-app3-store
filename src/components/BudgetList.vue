@@ -3,7 +3,7 @@
     <ElCard :header="header">
       <template v-if="!isEmpty">
         <div v-for="(item, prop) in sortListBudget" :key="prop">
-          <BudgetListItem :item="item" @deleteItemToList="deleteItemToApp" />
+          <BudgetListItem :item="item" />
         </div>
       </template>
       <ElAlert type="info" :title="emptyTitle" :closable="false" v-else />
@@ -33,11 +33,6 @@ export default {
     ...mapGetters("budgetListStore", ["sortListBudget"]),
     isEmpty() {
       return !Object.keys(this.list).length;
-    },
-  },
-  methods: {
-    deleteItemToApp(id) {
-      this.$emit("deleteItem", id);
     },
   },
 };

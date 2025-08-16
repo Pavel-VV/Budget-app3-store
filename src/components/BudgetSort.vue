@@ -29,9 +29,6 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "BudgetSort",
-  // data: () => ({
-  //   sort: "ALL",
-  // }),
   watch: {
     getBudgetList: function () {
       this.changeSort();
@@ -46,8 +43,6 @@ export default {
       let button = e.target;
       if (button.tagName !== "BUTTON") button = button.parentElement;
       this.changeSort(button.dataset.sort);
-      // this.sort = button.dataset.sort;
-      // this.$emit("sortList", this.sort);
     },
   },
 };

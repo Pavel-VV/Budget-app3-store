@@ -8,12 +8,6 @@
 import { mapGetters } from "vuex";
 export default {
   name: "TotalBalance",
-  // props: {
-  //   total: {
-  //     type: Number,
-  //     default: 0,
-  //   },
-  // },
   computed: {
     ...mapGetters("budgetListStore", ["getTotalBalance"]),
     balanceColorStyle() {

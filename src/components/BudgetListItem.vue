@@ -27,7 +27,6 @@ export default {
     ...mapActions("budgetListStore", ["deleteItemList"]),
     deleteItem(id) {
       if (confirm("Вы точно хотите удалить запись ?")) {
-        // this.$emit("deleteItemToList", id);
         this.deleteItemList(id);
       }
     },

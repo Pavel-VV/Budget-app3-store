@@ -64,7 +64,6 @@ export default {
         if (valid) {
           this.valueOutcom();
           this.setNewItemList({ ...this.formData });
-          // this.$emit("addNewItem", { ...this.formData });
           this.$refs.addItemForm.resetFields();
         }
       });
@@ -74,11 +73,6 @@ export default {
         this.formData.value = Number(`-${this.formData.value}`);
       }
     },
-    // validateValue(rule, value, callback) {
-    //   if(value === 0) {
-    //     callback(new Error('Please inpute value don`t "0"'));
-    //   } else callback();
-    // },
   },
 };
 </script>
