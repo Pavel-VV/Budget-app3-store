@@ -26,12 +26,20 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "BudgetSort",
   // data: () => ({
   //   sort: "ALL",
   // }),
+  watch: {
+    getBudgetList: function () {
+      this.changeSort();
+    },
+  },
+  computed: {
+    ...mapGetters("budgetListStore", ["getBudgetList", "getSort"]),
+  },
   methods: {
     ...mapActions("budgetListStore", ["changeSort"]),
     budgetSort(e) {

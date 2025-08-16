@@ -1,4 +1,4 @@
-// import Vue from "vue";
+import Vue from "vue";
 
 const budgetListStore = {
   namespaced: true,
@@ -17,7 +17,7 @@ const budgetListStore = {
         id: 2,
       },
     },
-    // sort: "ALL",
+    sort: "ALL",
     sortedList: null,
   },
   getters: {
@@ -36,9 +36,12 @@ const budgetListStore = {
     },
   },
   mutations: {
-    // TOGGLE_SORT(state, sortType) {
-    //   state.sort = sortType;
-    // },
+    ADD_NEW_ITEM(state, item) {
+      Vue.set(state.list, item.id, item);
+    },
+    TOGGLE_SORT(state, sortType) {
+      state.sort = sortType;
+    },
     CHANGE_SORTED_LIST(state, list) {
       state.sortedList = list;
       // state.sortedList = {};
@@ -47,21 +50,34 @@ const budgetListStore = {
       //   Vue.set(state.sortedList, elem.id, elem)
       // );
     },
+    DELETE_ITEM(state, id) {
+      Vue.delete(state.list, id);
+    },
   },
   actions: {
     changeSort({ commit, getters }, type) {
-      // commit("TOGGLE_SORT", type);
+      // console.log(type);
+      if (type !== undefined) {
+        commit("TOGGLE_SORT", type);
+      }
       let sortedList = Object.values({ ...getters.getBudgetList }).reduce(
         (list, item) => {
-          if (item.type === type) {
+          if (item.type === getters.getSort) {
             list[item.id] = item;
-          } else if (type === "ALL") list[item.id] = item;
+          } else if (getters.getSort === "ALL") list[item.id] = item;
           return list;
         },
         {}
       );
       commit("CHANGE_SORTED_LIST", sortedList);
       // this.sortedList = sortedList;
+    },
+    setNewItemList({ commit }, item) {
+      const newItem = { ...item, id: String(Math.random()) };
+      commit("ADD_NEW_ITEM", newItem);
+    },
+    deleteItemList({ commit }, id) {
+      commit("DELETE_ITEM", id);
     },
   },
 };

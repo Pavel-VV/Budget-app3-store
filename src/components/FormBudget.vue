@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "FormBudget",
   data: () => {
@@ -57,11 +58,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions("budgetListStore", ["setNewItemList"]),
     onSubmit() {
       this.$refs.addItemForm.validate((valid) => {
         if (valid) {
           this.valueOutcom();
-          this.$emit("addNewItem", { ...this.formData });
+          this.setNewItemList({ ...this.formData });
+          // this.$emit("addNewItem", { ...this.formData });
           this.$refs.addItemForm.resetFields();
         }
       });

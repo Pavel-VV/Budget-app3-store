@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FormBudget @addNewItem="onNewItem" />
+    <FormBudget />
     <TotalBalance />
     <BudgetSort />
     <BudgetList @deleteItem="onDelete" />
@@ -53,17 +53,17 @@ export default {
     //   return list;
     // },
   },
-  watch: {
-    getBudgetList: "sortList",
-  },
+  // watch: {
+  //   getBudgetList: "sortList",
+  // },
   methods: {
     onDelete(id) {
       this.$delete(this.list, id);
     },
-    onNewItem(item) {
-      const newObj = { ...item, id: String(Math.random()) };
-      this.$set(this.list, newObj.id, newObj);
-    },
+    // onNewItem(item) {
+    //   const newObj = { ...item, id: String(Math.random()) };
+    //   this.$set(this.list, newObj.id, newObj);
+    // },
     // sortList() {
     //   let type = this.dataType;
     //   let sortedList = Object.values(this.getBudgetList).reduce(
